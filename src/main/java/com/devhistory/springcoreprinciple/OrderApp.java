@@ -3,16 +3,17 @@ package com.devhistory.springcoreprinciple;
 import com.devhistory.springcoreprinciple.member.Grade;
 import com.devhistory.springcoreprinciple.member.Member;
 import com.devhistory.springcoreprinciple.member.MemberService;
-import com.devhistory.springcoreprinciple.member.MemberServiceImpl;
 import com.devhistory.springcoreprinciple.order.Order;
 import com.devhistory.springcoreprinciple.order.OrderService;
-import com.devhistory.springcoreprinciple.order.OrderServiceImpl;
 
 public class OrderApp {
 
     public static void main(String[] args) {
-        MemberService memberService = new MemberServiceImpl();
-        OrderService orderService = new OrderServiceImpl();
+        AppConfig appConfig = new AppConfig();
+        MemberService memberService = appConfig.memberService();
+        OrderService orderService = appConfig.orderService();
+//        MemberService memberService = new MemberServiceImpl();
+//        OrderService orderService = new OrderServiceImpl();
 
         Long memberId = 1L;
         Member member = new Member(memberId, "memberA", Grade.VIP);
