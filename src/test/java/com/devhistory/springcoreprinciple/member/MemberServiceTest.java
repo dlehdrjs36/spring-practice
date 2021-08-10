@@ -2,7 +2,6 @@ package com.devhistory.springcoreprinciple.member;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
 class MemberServiceTest {
 
@@ -19,7 +18,6 @@ class MemberServiceTest {
 
         //then
         Assertions.assertThat(member).isEqualTo(findMember);
-
     }
 
 }
