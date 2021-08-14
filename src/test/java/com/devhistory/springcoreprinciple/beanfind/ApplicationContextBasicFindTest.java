@@ -3,14 +3,13 @@ package com.devhistory.springcoreprinciple.beanfind;
 import com.devhistory.springcoreprinciple.AppConfig;
 import com.devhistory.springcoreprinciple.member.MemberService;
 import com.devhistory.springcoreprinciple.member.MemberServiceImpl;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ApplicationContextBasicFindTest {
 
@@ -20,6 +19,7 @@ class ApplicationContextBasicFindTest {
     @DisplayName("빈 이름으로 조회")
     void findBeanByName() {
         MemberService memberService = ac.getBean("memberService", MemberService.class);
+        /* 테스트 자체를 디버그해보고 싶은 경우가 아니라면 로그부분은 제거하는 것이 좋다. */
         System.out.println("memberService = " + memberService);
         System.out.println("memberService.getClass() = " + memberService.getClass());
         assertThat(memberService).isInstanceOf(MemberServiceImpl.class);

@@ -16,6 +16,7 @@ class ApplicationContextInfoTest {
     @DisplayName("모든 빈 출력하기")
     void findAllBean(){
         String[] beanDefinitionNames = ac.getBeanDefinitionNames();
+        /* 테스트 자체를 디버그해보고 싶은 경우가 아니라면 로그부분은 제거하는 것이 좋다. */
         for (String beanDefinitionName : beanDefinitionNames) {
             Object bean = ac.getBean(beanDefinitionName);
             System.out.println("name = " + beanDefinitionName + " object = " + bean);
@@ -30,6 +31,7 @@ class ApplicationContextInfoTest {
         for (String beanDefinitionName : beanDefinitionNames) {
             BeanDefinition beanDefinition = ac.getBeanDefinition(beanDefinitionName);//Bean에 대한 메타데이터 정보 조회
 
+            /* 테스트 자체를 디버그해보고 싶은 경우가 아니라면 로그부분은 제거하는 것이 좋다. */
             //ROLE_APPLICATION : 일반적으로 사용자가 정의한 빈
             //ROLE_INFRASTRUCTURE : 스프링이 내부에서 사용하는 빈
             if(beanDefinition.getRole() == BeanDefinition.ROLE_APPLICATION){
