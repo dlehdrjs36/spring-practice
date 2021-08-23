@@ -2,6 +2,7 @@ package com.devhistory.springcoreprinciple.singleton;
 
 import com.devhistory.springcoreprinciple.AppConfig;
 import com.devhistory.springcoreprinciple.member.MemberRepository;
+import com.devhistory.springcoreprinciple.member.MemberService;
 import com.devhistory.springcoreprinciple.member.MemberServiceImpl;
 import com.devhistory.springcoreprinciple.order.OrderServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -37,9 +38,11 @@ public class ConfigurationSingletonTest {
     @Test
     void configurationDeep() {
         ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
-        AppConfig bean = ac.getBean(AppConfig.class);
+        AppConfig bean = ac.getBean(AppConfig.class);//바이트 코드 조작된 class
+        MemberService bean2 = ac.getBean(MemberService.class);//원래 class
 
-        System.out.println("bean = " + bean.getClass());
+        System.out.println("bean = " + bean.getClass());//바이트 코드 조작된 class
+        System.out.println("bean2 = " + bean2.getClass());//원래 class
     }
 
 }

@@ -6,7 +6,10 @@ import com.devhistory.springcoreprinciple.discount.RateDiscountPolicy;
 import com.devhistory.springcoreprinciple.member.Member;
 import com.devhistory.springcoreprinciple.member.MemberRepository;
 import com.devhistory.springcoreprinciple.member.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService {
 //  private final MemberRepository memberRepository = new MemoryMemberRepository();
     private final MemberRepository memberRepository; // 구현체 의존 제거
@@ -14,6 +17,7 @@ public class OrderServiceImpl implements OrderService {
 //  private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
     private final DiscountPolicy discountPolicy; // 구현체 의존 제거
 
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
