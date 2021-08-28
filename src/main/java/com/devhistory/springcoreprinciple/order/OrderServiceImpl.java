@@ -6,10 +6,12 @@ import com.devhistory.springcoreprinciple.discount.RateDiscountPolicy;
 import com.devhistory.springcoreprinciple.member.Member;
 import com.devhistory.springcoreprinciple.member.MemberRepository;
 import com.devhistory.springcoreprinciple.member.MemoryMemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor //final이 붙은 클래스 변수를 가지는 생성자를 생성
 public class OrderServiceImpl implements OrderService {
 //  private final MemberRepository memberRepository = new MemoryMemberRepository();
     private final MemberRepository memberRepository; // 구현체 의존 제거
@@ -31,12 +33,12 @@ public class OrderServiceImpl implements OrderService {
 //    }
 
     //생성자 주입
-    @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        System.out.println("(생성자 주입은 호출 시 발생)의존관계 주입 발생 순서 : OrderServiceImpl" );
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
-    }
+//  @Autowired 생성자가 하나만 있는 경우, 생략 가능
+//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+//        System.out.println("(생성자 주입은 호출 시 발생)의존관계 주입 발생 순서 : OrderServiceImpl" );
+//        this.memberRepository = memberRepository;
+//        this.discountPolicy = discountPolicy;
+//    }
 
 //    public OrderServiceImpl(){
 //
