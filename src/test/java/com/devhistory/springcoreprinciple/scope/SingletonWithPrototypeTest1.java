@@ -2,11 +2,15 @@ package com.devhistory.springcoreprinciple.scope;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.inject.Provider;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -33,18 +37,26 @@ public class SingletonWithPrototypeTest1 {
 
         ClientBean clientBean2 = ac.getBean(ClientBean.class);
         int count2 = clientBean2.logic();
-        assertThat(count2).isEqualTo(2);
+        assertThat(count2).isEqualTo(1);
     }
 
     @Scope("singleton")
     static class ClientBean {
-        private final PrototypeBean prototypeBean; //생성시점에 주입
+//      private final PrototypeBean prototypeBean; //생성시점에 주입
 
-        public ClientBean(PrototypeBean prototypeBean) {
-            this.prototypeBean = prototypeBean;
-        }
+        /* 프로토타입 조회 시마다 생성 해결방법 1 ObjectFactory, ObjectProvider */
+//        @Autowired
+//        private ObjectFactory<PrototypeBean> prototypeBeanProvider; //ObjectFactory는 스프링이 자동으로 주입. DL 서비스 제공
+
+        /* 프로토타입 조회 시마다 생성 해결방법 2 Javax Inject */
+        @Autowired
+        private Provider<PrototypeBean> prototypeBeanProvider;
+//        public ClientBean(PrototypeBean prototypeBean) {
+//            this.prototypeBean = prototypeBean;
+//        }
 
         public int logic() {
+            PrototypeBean prototypeBean = prototypeBeanProvider.get();
             prototypeBean.addCount();
             return prototypeBean.getCount();
         }
